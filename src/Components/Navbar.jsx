@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const links = (
@@ -8,7 +9,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -41,7 +42,9 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end flex gap-5">
-        <button>Log Out</button>
+        <button>
+          <Link to="/login">Login</Link>
+        </button>
         <div className="dropdown dropdown-hover dropdown-end">
           <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
@@ -56,10 +59,26 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-[-2] w-52 p-2 shadow"
           >
             <p>display name</p>
-            <p>Add Volunteer need Post</p>
-            <p>Manage My Posts 
-            </p>
-            <button>Log Out</button>
+            <button>
+              <li>Log out</li>
+            </button>
+          </ul>
+        </div>
+        <div className="flex-none">
+          <ul className="menu menu-horizontal px-1">
+            <li>
+              <details>
+                <summary>My Profile</summary>
+                <ul className="bg-base-100 rounded-t-none p-2">
+                  <li>
+                    Add Volunteer need Post
+                  </li>
+                  <li>
+                    Manage My Posts 
+                  </li>
+                </ul>
+              </details>
+            </li>
           </ul>
         </div>
       </div>
