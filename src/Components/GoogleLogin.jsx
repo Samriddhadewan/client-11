@@ -1,26 +1,24 @@
-import React, { useContext } from 'react'
-// import AuthContext from '../Context/AuthContext'
+import React, { useContext } from "react";
+import { AuthContext } from "../Context/AuthProvider";
 
 const GoogleLogin = () => {
-    // const {LoginWithGoogle} = useContext(AuthContext);
+  const { handleLoginUserWithGoogle } = useContext(AuthContext);
 
-    const googleLogin = ()=>{
-        LoginWithGoogle()
-        .then((result)=>{
-            
-        })
-        .them((error)=>{
-
-        })
-    }
+  const HandleGoogleLogin = () => {
+    handleLoginUserWithGoogle()
+      .then((result) => {})
+      .them((error) => {});
+  };
 
   return (
     <div>
-              <div className="divider">OR</div>
+      <div className="divider my-1">OR</div>
 
-           <button className='btn btn-neutral w-full' onClick={googleLogin}>GoogleLogin</button>
+      <button className="btn bg-[#4285F4] text-white w-full" onClick={HandleGoogleLogin}>
+        GoogleLogin
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default GoogleLogin
+export default GoogleLogin;

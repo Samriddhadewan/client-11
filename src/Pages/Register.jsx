@@ -1,6 +1,7 @@
 import React, { useContext, } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider";
+import GoogleLogin from "../Components/GoogleLogin";
 const Register = () => {
   const { HandleCreateUserWithEmailAndPassword, HandleUpdateUserProfile } =
     useContext(AuthContext);
@@ -67,6 +68,7 @@ const Register = () => {
                 Register
               </button>
             </fieldset>
+            <GoogleLogin />
           </form>
           <h1 className="pt-3">
             All ready have an Account ?{" "}

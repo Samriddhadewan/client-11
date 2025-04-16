@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from "react-router-dom";
 import { AuthContext } from '../Context/AuthProvider';
+import GoogleLogin from '../Components/GoogleLogin';
 const Login = () => {
   const {HandleUserLogin} = useContext(AuthContext)
   const handleLoginUser = (e) => {
@@ -45,12 +46,7 @@ const Login = () => {
               </button>
             </fieldset>
           </form>
-          <button
-            // onClick={handleGoogleLogin}
-            className="border btn py-2 rounded-b-sm bg-[#4285F4]  text-white"
-          >
-            Continue With Google
-          </button>
+          <GoogleLogin></GoogleLogin>
           <h1 className="pt-4">
             Don't have an Account?{" "}
             <Link className="underline text-blue-800" to="/register">
