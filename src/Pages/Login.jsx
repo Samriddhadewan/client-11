@@ -1,12 +1,28 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from "react-router-dom";
+import { AuthContext } from '../Context/AuthProvider';
 const Login = () => {
+  const {HandleUserLogin} = useContext(AuthContext)
+  const handleLoginUser = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    HandleUserLogin(email, password)
+      .then((result) => {
+        console.log(result.user);
+        form.reset();
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
   return (
     <div>
       <div className="min-h-[80vh] flex items-center justify-center">
         <div className="card bg-base-100 w-full max-w-xl p-14 shrink-0 shadow-2xl">
           <form 
-          // onSubmit={handleLoginUser}
+          onSubmit={handleLoginUser}
            className="">
             <h1 className="text-4xl text-center font-bold">Login Now</h1>
             <fieldset className="fieldset">

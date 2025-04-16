@@ -1,13 +1,37 @@
-import React from 'react'
-import { Link } from "react-router-dom";  
+import React, { useContext, } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../Context/AuthProvider";
 const Register = () => {
+  const { HandleCreateUserWithEmailAndPassword, HandleUpdateUserProfile } =
+    useContext(AuthContext);
+
+  const handleRegisterUser = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const photo = form.photo.value;
+
+    HandleCreateUserWithEmailAndPassword(email, password)
+    .then(() => {
+      HandleUpdateUserProfile({ 
+        displayName: name, 
+        photoURL: photo 
+      });
+      form.reset();
+      console.log("User Created Successfully");
+    })
+    .catch((error)=>{
+      console.log(error.message);
+    })
+  };
+
   return (
     <div>
       <div className="min-h-[80vh] flex justify-center items-center">
         <div className="card bg-base-100 w-full max-w-xl p-14 shrink-0 shadow-2xl">
-          <form 
-        //   onSubmit={handleSubmitForm} 
-          className="">
+          <form onSubmit={handleRegisterUser} className="">
             <h1 className="text-3xl text-center font-bold">Register Now</h1>
             <fieldset className="fieldset">
               <label className="fieldset-label">Name</label>
@@ -53,7 +77,7 @@ const Register = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

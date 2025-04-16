@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Context/AuthProvider";
 
 const Navbar = () => {
+  const { user, handleUserLogOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    handleUserLogOut()
+      .then(() => {
+        console.log("User logged out successfully");
+      })
+      .catch((error) => {
+        console.error("Error logging out:", error);
+      });
+  }
+
   const links = (
     <>
       <li>Home</li>
@@ -42,40 +55,39 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end flex gap-5">
-        <button>
-          <Link to="/login">Login</Link>
-        </button>
-        <div className="dropdown dropdown-hover dropdown-end">
-          <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
+        {user && user?.email ? (
+          <div className="dropdown dropdown-hover dropdown-end">
+            <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img
+                  alt="Tailwind CSS Navbar component"
+                  src={user?.photoURL ? user.photoURL : "https://placeimg.com/192/192/people"}
+                />
+              </div>
             </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-[-2] w-52 p-2 shadow"
+            >
+              <p className="text-center">{user?.displayName}</p>
+              <button onClick={handleLogOut} className="btn">
+                <li >Log out</li>
+              </button>
+            </ul>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-[-2] w-52 p-2 shadow"
-          >
-            <p>display name</p>
-            <button>
-              <li>Log out</li>
-            </button>
-          </ul>
-        </div>
+        ) : (
+          <Link to="/login" className="btn">
+            Login
+          </Link>
+        )}
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
             <li>
               <details>
                 <summary>My Profile</summary>
                 <ul className="bg-base-100 rounded-t-none p-2">
-                  <li>
-                    Add Volunteer need Post
-                  </li>
-                  <li>
-                    Manage My Posts 
-                  </li>
+                  <li>Add Volunteer need Post</li>
+                  <li>Manage My Posts</li>
                 </ul>
               </details>
             </li>
