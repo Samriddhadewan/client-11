@@ -1,8 +1,12 @@
 import React, { useContext } from 'react'
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from '../Context/AuthProvider';
 import GoogleLogin from '../Components/GoogleLogin';
 const Login = () => {
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state || "/";
   const {HandleUserLogin} = useContext(AuthContext)
   const handleLoginUser = (e) => {
     e.preventDefault();
@@ -11,7 +15,7 @@ const Login = () => {
     const password = form.password.value;
     HandleUserLogin(email, password)
       .then((result) => {
-        console.log(result.user);
+        navigate(from, { replace: true })
         form.reset();
       })
       .catch((error) => {

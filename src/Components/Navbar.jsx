@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const links = (
     <>
-      <li>Home</li>
+      <Link className="mr-2" to="/">Home</Link>
       <li>All volunteer Need posts</li>
     </>
   );
@@ -86,7 +86,7 @@ const Navbar = () => {
               <details>
                 <summary>My Profile</summary>
                 <ul className="bg-base-100 rounded-t-none p-2">
-                  <li>Add Volunteer need Post</li>
+                  <Link to="/needVolunteer"><li> Add Volunteer need Post</li></Link>
                   <li>Manage My Posts</li>
                 </ul>
               </details>
