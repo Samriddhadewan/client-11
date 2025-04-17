@@ -1,7 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const PostCards = ({ post }) => {
   const {
+    _id,
     title,
     thumbnail,
     description,
@@ -14,7 +16,7 @@ const PostCards = ({ post }) => {
   } = post || {};
 
   return (
-    <div className="card p-3 bg-base-100 w-96 shadow-sm">
+    <Link to={`/job/${_id}`} className="card p-3 bg-base-100 w-96 shadow-sm">
       <figure>
         <img className="rounded-lg" src={thumbnail} alt="Thumbnail" />
       </figure>
@@ -32,7 +34,7 @@ const PostCards = ({ post }) => {
         <p className="text-base text-gray-700 ">Minimum Volunteer: {min_volunteer}</p>
         <p className="text-base text-gray-700 my-2">Total Requests : {request_count}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

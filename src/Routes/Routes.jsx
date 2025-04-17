@@ -5,6 +5,7 @@ import Register from "../Pages/Register";
 import NeedVolunteer from "../Pages/NeedVolunteer";
 import PrivateRoute from "./PrivateRoute";
 import AllVolunteerPost from "../Pages/AllVolunteerPost";
+import PostDetail from "../Pages/PostDetail";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -34,6 +35,11 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "/job/:id",
+        element: <PrivateRoute> <PostDetail></PostDetail> </PrivateRoute>,
+        loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/post/${params.id}`),
+      }
     ],
   },
 ]);
