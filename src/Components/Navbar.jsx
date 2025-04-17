@@ -18,7 +18,8 @@ const Navbar = () => {
   const links = (
     <>
       <Link className="mr-2" to="/">Home</Link>
-      <li>All volunteer Need posts</li>
+      <Link className="mr-2" to="/allVolunteerPost">All volunteer Need posts</Link>
+      
     </>
   );
   return (
@@ -85,8 +86,8 @@ const Navbar = () => {
             <li>
               <details>
                 <summary>My Profile</summary>
-                <ul className="bg-base-100 rounded-t-none p-2">
-                  <Link to="/needVolunteer"><li> Add Volunteer need Post</li></Link>
+                <ul className="bg-base-300  rounded-t-none p-2">
+                  <Link className="bg-white" to="/needVolunteer"><li> Add Volunteer need Post</li></Link>
                   <li>Manage My Posts</li>
                 </ul>
               </details>
