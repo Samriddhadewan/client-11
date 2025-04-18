@@ -1,11 +1,12 @@
 import { format } from "date-fns";
 import React, { useContext, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider";
 import toast from "react-hot-toast";
 import axios from "axios";
 
 const ApplyCampaign = () => {
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const job = useLoaderData();
   const [error, setError] = useState("");
@@ -35,6 +36,9 @@ const ApplyCampaign = () => {
       status,
       postId: _id,
       organizer,
+      title,
+      category,
+      location,
     };
 
     if (organizer?.email === user?.email) {
@@ -46,6 +50,7 @@ const ApplyCampaign = () => {
         form.reset();
         toast.success("Request sent successfully");
         console.log(data);
+        navigate("/manageMyPost");
     } catch (error) {
         setError(error.message);
         console.log(error);

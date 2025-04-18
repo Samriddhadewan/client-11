@@ -4,7 +4,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../Context/AuthProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const NeedVolunteer = () => {
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
   const [startDate, setStartDate] = useState(new Date());
@@ -43,6 +45,7 @@ const NeedVolunteer = () => {
       console.log(data);
       toast.success("Volunteer Campaign Created Successfully");
       form.reset();
+      navigate("/manageMyPost");  
     } catch (error) {
       console.log(error);
       toast.error(error.message);

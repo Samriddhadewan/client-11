@@ -1,17 +1,18 @@
 import React, { use, useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider";
 import DatePicker from "react-datepicker";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 const UpdatePost = () => {
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [post, setPost] = React.useState({});
   const { id } = useParams();
   console.log(id);
   console.log(post);
-    const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
   const {
     thumbnail,
     title,
@@ -23,7 +24,9 @@ const UpdatePost = () => {
   } = post || {};
 
   const fetchPost = async () => {
-    const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/post/${id}`);
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_API_URL}/post/${id}`
+    );
     setPost(data);
     setStartDate(new Date(data?.deadline));
   };
@@ -43,44 +46,40 @@ const UpdatePost = () => {
     const deadline = startDate;
 
     const postUpdatedData = {
-        title,
-        thumbnail,
-        description,
-        category,
-        location,
-        min_volunteer,
-        deadline,
-        request_count,
-        organizer: {
+      title,
+      thumbnail,
+      description,
+      category,
+      location,
+      min_volunteer,
+      deadline,
+      request_count,
+      organizer: {
         name: user?.displayName,
         email: user?.email,
-        },
-    }
+      },
+    };
     console.log(postUpdatedData);
     try {
-        const {data} = await axios.put(`${import.meta.env.VITE_API_URL}/update-post/${id}`, postUpdatedData);
-        if(data.modifiedCount > 0){
-            toast.success("Post updated successfully"); 
-        console.log(data);
-        }
+      const { data } = await axios.put(
+        `${import.meta.env.VITE_API_URL}/update-post/${id}`,
+        postUpdatedData
+      );
+      if (data.modifiedCount > 0) {
+        toast.success("Post updated successfully");
+        navigate("/manageMyPost");
+      }
     } catch (error) {
-        toast.error(error.message);
-        console.log(error);
+      toast.error(error.message);
+      console.log(error);
     }
-
-  }
-
-
-
+  };
 
   return (
     <div>
       <div className="min-h-[80vh] flex my-7 justify-center items-center">
         <div className="card bg-base-100 w-full max-w-xl p-14 shrink-0 shadow-2xl">
-          <form
-              onSubmit={handleSubmit}
-            className=""
-          >
+          <form onSubmit={handleSubmit} className="">
             <h1 className="text-4xl mb-4 text-center font-bold">
               Update New Volunteer Campaign
             </h1>
@@ -125,7 +124,7 @@ const UpdatePost = () => {
                   Description
                 </label>
                 <textarea
-                    defaultValue={description}
+                  defaultValue={description}
                   className="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                   name="description"
                   id="description"
@@ -138,7 +137,7 @@ const UpdatePost = () => {
                   Location
                 </label>
                 <input
-                    defaultValue={location}
+                  defaultValue={location}
                   id="location"
                   name="location"
                   type="Location"
@@ -152,7 +151,7 @@ const UpdatePost = () => {
                 </label>
                 <input
                   required
-                defaultValue={min_volunteer}
+                  defaultValue={min_volunteer}
                   id="min_volunteer"
                   name="min_volunteer"
                   type="number"
@@ -199,7 +198,7 @@ const UpdatePost = () => {
                 />
               </div>
 
-              <button className="btn bg-[#0E7A81] text-white mt-4">Post</button>
+              <button className="btn bg-[#0E7A81] text-white mt-4">Update</button>
             </fieldset>
           </form>
         </div>

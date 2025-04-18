@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../Context/AuthProvider';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const VolunteerNeedPosts = () => {
     const [posts, setPosts] = useState([]);
@@ -14,7 +15,6 @@ const VolunteerNeedPosts = () => {
         setPosts(data);
     }
 
-    console.log(posts);
 
     useEffect(()=>{
         fetchPosts();
@@ -22,6 +22,31 @@ const VolunteerNeedPosts = () => {
     if (posts.length === 0) {
         return <div className="text-center text-2xl font-semibold">No requests found</div>;
     }
+
+    const handleDelete = async (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`${import.meta.env.VITE_API_URL}/delete-post/${id}`)
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+                fetchPosts();
+            }
+          });
+        
+    }
+
+
     return (
         <section className="container px-4 mx-auto pt-12">
         <div className="flex items-center gap-x-3">
@@ -100,7 +125,7 @@ const VolunteerNeedPosts = () => {
                           <div className="flex items-center gap-x-2">
                             <p
                               className={`px-3 py-1 ${
-                                job?.category === "Healthcare" &&
+                                job?.category === "HealthCare" &&
                                 "text-green-400"
                               }
                               ${job?.category === "Education" && "text-yellow-500"}
@@ -120,7 +145,7 @@ const VolunteerNeedPosts = () => {
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
                           <div className="flex items-center gap-x-6">
                             <button
-                            //   onClick={() => modernDelete(job?._id)}
+                              onClick={() => handleDelete(job?._id)}
                               className="text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none"
                             >
                               <svg
