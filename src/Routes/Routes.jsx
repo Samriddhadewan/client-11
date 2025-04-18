@@ -7,6 +7,7 @@ import PrivateRoute from "./PrivateRoute";
 import AllVolunteerPost from "../Pages/AllVolunteerPost";
 import PostDetail from "../Pages/PostDetail";
 import ApplyCampaign from "../Pages/ApplyCampaign";
+import ManageMyPost from "../Pages/ManageMyPost";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,13 +39,34 @@ const router = createBrowserRouter([
       },
       {
         path: "/job/:id",
-        element: <PrivateRoute> <PostDetail></PostDetail> </PrivateRoute>,
-        loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/post/${params.id}`),
+        element: (
+          <PrivateRoute>
+            {" "}
+            <PostDetail></PostDetail>{" "}
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/post/${params.id}`),
       },
       {
         path: "/apply/:id",
-        element: <PrivateRoute> <ApplyCampaign></ApplyCampaign> </PrivateRoute>,
-        loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/post/${params.id}`),
+        element: (
+          <PrivateRoute>
+            {" "}
+            <ApplyCampaign></ApplyCampaign>{" "}
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/post/${params.id}`),
+      },
+      {
+        path: "/manageMyPost",
+        element: (
+          <PrivateRoute>
+            {" "}
+            <ManageMyPost></ManageMyPost>{" "}
+          </PrivateRoute>
+        ),
       },
     ],
   },

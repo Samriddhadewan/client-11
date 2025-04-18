@@ -88,7 +88,7 @@ const Navbar = () => {
                 <summary>My Profile</summary>
                 <ul className="bg-base-300  rounded-t-none p-2">
                   <Link className="bg-white" to="/needVolunteer"><li> Add Volunteer need Post</li></Link>
-                  <li>Manage My Posts</li>
+                  <Link className="bg-white" to="/manageMyPost"><li>Manage My Posts</li></Link>
                 </ul>
               </details>
             </li>
