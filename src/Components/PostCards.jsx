@@ -6,11 +6,9 @@ const PostCards = ({ post }) => {
     _id,
     title,
     thumbnail,
-    description,
     location,
     min_volunteer,
     deadline,
-    organizer,
     category,
     request_count,
   } = post || {};
