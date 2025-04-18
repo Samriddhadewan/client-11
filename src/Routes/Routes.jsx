@@ -8,6 +8,7 @@ import AllVolunteerPost from "../Pages/AllVolunteerPost";
 import PostDetail from "../Pages/PostDetail";
 import ApplyCampaign from "../Pages/ApplyCampaign";
 import ManageMyPost from "../Pages/ManageMyPost";
+import UpdatePost from "../Pages/UpdatePost";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -68,6 +69,12 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "/update/:id",
+        element: <PrivateRoute>
+          <UpdatePost></UpdatePost>
+        </PrivateRoute>
+      }
     ],
   },
 ]);
