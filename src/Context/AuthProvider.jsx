@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import app from "../Firebase/Firebase";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 
@@ -52,10 +53,18 @@ const AuthProvider = ({ children }) => {
 
   // checks if the user is logged in or not
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
+    const unsubscribe = onAuthStateChanged(auth, async(currentUser) => {
       console.log("User login -->", currentUser);
+      if(currentUser?.email){
+        setUser(currentUser);
+        const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`,{email: user?.email}, {withCredentials: true});
+        console.log(data);
+      }else{
+        setUser(null);
+        const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {withCredentials: true});
+        console.log(data);
+      }
+      setLoading(false);
     });
     return () => unsubscribe();
   }, [auth]);

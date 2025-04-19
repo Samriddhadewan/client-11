@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const GoogleLogin = () => {
   const { handleLoginUserWithGoogle } = useContext(AuthContext);
@@ -11,6 +13,7 @@ const GoogleLogin = () => {
   const HandleGoogleLogin = async() => {
     try {
       await handleLoginUserWithGoogle();
+      toast.success("Login Successfull")
       navigate(form, { replace: true });  
     } catch (error) {
       console.log(error)

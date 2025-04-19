@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from '../Context/AuthProvider';
 import GoogleLogin from '../Components/GoogleLogin';
+import toast from 'react-hot-toast';
 const Login = () => {
 
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const Login = () => {
     const password = form.password.value;
     HandleUserLogin(email, password)
       .then((result) => {
+        toast.success("Login Successfull")
         navigate(from, { replace: true })
         form.reset();
       })
