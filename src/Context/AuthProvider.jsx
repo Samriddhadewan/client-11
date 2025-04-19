@@ -57,7 +57,7 @@ const AuthProvider = ({ children }) => {
       console.log("User login -->", currentUser);
       if(currentUser?.email){
         setUser(currentUser);
-        const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`,{email: user?.email}, {withCredentials: true});
+        const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`,{email: currentUser?.email}, {withCredentials: true});
         console.log(data);
       }else{
         setUser(null);

@@ -1,15 +1,17 @@
-import React, { useContext, useEffect } from "react";
+import React, { use, useContext, useEffect } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const VolunteerRequests = () => {
+  const axiosSecure = useAxiosSecure();
   const [posts, setPosts] = React.useState([]);
   const { user } = useContext(AuthContext);
 
   const fetchPosts = async () => {
-    const { data } = await axios.get(
-      `${import.meta.env.VITE_API_URL}/requests/${user?.email}`
+    const { data } = await axiosSecure.get(
+      `/requests/${user?.email}`
     );
     setPosts(data);
   };
@@ -17,7 +19,7 @@ const VolunteerRequests = () => {
   console.log(posts);
   useEffect(() => {
     fetchPosts();
-  }, [user]);
+  }, [user, posts]);
 
   const handleDelete = (id, postId) => {
     Swal.fire({
@@ -30,10 +32,8 @@ const VolunteerRequests = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(
-          `${
-            import.meta.env.VITE_API_URL
-          }/delete-request/${id}?postId=${postId}`
+        axiosSecure.delete(
+          `/delete-request/${id}?postId=${postId}`
         );
         Swal.fire({
           title: "Deleted!",

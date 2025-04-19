@@ -15,7 +15,7 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     HandleUserLogin(email, password)
-      .then((result) => {
+      .then(() => {
         toast.success("Login Successfull")
         navigate(from, { replace: true })
         form.reset();

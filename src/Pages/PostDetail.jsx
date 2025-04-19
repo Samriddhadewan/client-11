@@ -33,7 +33,9 @@ const PostDetail = () => {
           </p>
           <p className="text-xl font-semibold">
             Last Donating Date:{" "}
-            <span className="text-gray-500 font-normal">{format (new Date(deadline), "MM/dd/yyyy")}</span>
+            <span className="text-gray-500 font-normal">
+              {format (new Date(deadline), "MM/dd/yyyy")}
+              </span>
           </p>
           <p className=" font-semibold text-xl">
             Campaign Added By:{" "}
