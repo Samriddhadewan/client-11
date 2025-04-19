@@ -2,7 +2,9 @@ import React, { useContext, } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider";
 import GoogleLogin from "../Components/GoogleLogin";
+import toast from "react-hot-toast";
 const Register = () => {
+  const [error, setError] = React.useState("");
   const { HandleCreateUserWithEmailAndPassword, HandleUpdateUserProfile } =
     useContext(AuthContext);
 
@@ -14,6 +16,23 @@ const Register = () => {
     const password = form.password.value;
     const photo = form.photo.value;
 
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long.");
+      return;
+    }
+    if (!/[A-Z]/.test(password)) {
+      setError("Password must contain at least one uppercase letter.");
+      return;
+    }
+    if (!/[a-z]/.test(password)) {
+      setError("Password must contain at least one lowercase letter.");
+      return;
+    }
+
+
+
+
     HandleCreateUserWithEmailAndPassword(email, password)
     .then(() => {
       HandleUpdateUserProfile({ 
@@ -22,6 +41,8 @@ const Register = () => {
       });
       form.reset();
       console.log("User Created Successfully");
+      toast.success("User Created Successfully")
+      setError("");
     })
     .catch((error)=>{
       console.log(error.message);
@@ -63,7 +84,9 @@ const Register = () => {
                 className="input w-full"
                 placeholder="Enter Password"
               />
-
+              {
+                error && <p className="text-red-500">{error}</p>
+              }
               <button className="btn bg-[#0E7A81] text-white mt-4">
                 Register
               </button>

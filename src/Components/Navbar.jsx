@@ -81,7 +81,7 @@ const Navbar = () => {
             Login
           </Link>
         )}
-        <div className="flex-none">
+        <div className="flex-none z-50">
           <ul className="menu menu-horizontal px-1">
             <li>
               <details>

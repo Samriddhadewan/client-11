@@ -9,14 +9,17 @@ import PostDetail from "../Pages/PostDetail";
 import ApplyCampaign from "../Pages/ApplyCampaign";
 import ManageMyPost from "../Pages/ManageMyPost";
 import UpdatePost from "../Pages/UpdatePost";
+import Home from "../Pages/Home";
+import ErrorPage from "../Components/ErrorPage";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
-        element: <div>Home</div>,
+        element: <Home></Home>,
       },
       {
         path: "/login",

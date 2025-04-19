@@ -18,7 +18,7 @@ const VolunteerNeedPosts = () => {
 
   useEffect(() => {
     fetchPosts();
-  }, [user]);
+  }, [user,posts]);
   if (posts.length === 0) {
     return (
       <div className="text-center text-2xl font-semibold">

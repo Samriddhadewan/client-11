@@ -16,7 +16,7 @@ const PostCards = ({ post }) => {
   return (
     <Link to={`/job/${_id}`} className="card p-3 bg-base-100 w-96 shadow-sm">
       <figure>
-        <img className="rounded-lg" src={thumbnail} alt="Thumbnail" />
+        <img className="rounded-lg h-[220px] object-cover" src={thumbnail} alt="Thumbnail" />
       </figure>
       <div className="py-2 my-2  flex flex-col ">
         <div className="flex justify-between items-center">
