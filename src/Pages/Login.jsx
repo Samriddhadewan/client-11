@@ -4,7 +4,7 @@ import { AuthContext } from '../Context/AuthProvider';
 import GoogleLogin from '../Components/GoogleLogin';
 import toast from 'react-hot-toast';
 const Login = () => {
-
+  const [error, setError] = React.useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state || "/";
@@ -21,7 +21,7 @@ const Login = () => {
         form.reset();
       })
       .catch((error) => {
-        console.log(error.message);
+        setError(error.message);
       });
   };
   return (
@@ -47,6 +47,11 @@ const Login = () => {
                 className="input w-full"
                 placeholder="Password"
               />
+              {
+                error && (
+                  <p className="text-red-500 text-sm mt-2">{error}</p>
+                )
+              }
               <button className="btn bg-[#0E7A81] text-white mt-4">
                 Login
               </button>
