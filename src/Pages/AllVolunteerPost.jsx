@@ -3,27 +3,45 @@ import React, { useEffect, useState } from "react";
 import PostCards from "../Components/PostCards";
 
 const AllVolunteerPost = () => {
+  const [totalPosts, setTotalPosts] = useState([]);
   const [posts, setPosts] = useState([]);
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(0);
   const postsPerPage = 6;
-  const numberOfPages = Math.ceil(posts.length / postsPerPage);
-  console.log(numberOfPages);
+  const numberOfPages = Math.ceil(totalPosts.length / postsPerPage);
+  const pages = [...Array(numberOfPages).keys()];
 
-
+  useEffect(()=>{
+    const getTotalPosts = async () => {
+      const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/total-posts`);
+      setTotalPosts(data)
+    }
+    getTotalPosts()
+  },[])
 
 
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/posts?search=${search}`
-      );
+        `${import.meta.env.VITE_API_URL}/posts?search=${search}&page=${currentPage}&size=${postsPerPage}`);
       setPosts(data);
     };
     getData();
-  }, [search]);
+  }, [search,currentPage]);
 
 
-  console.log(search);
+
+  const handlePrevPage = () => {
+    if(currentPage > 0){
+      setCurrentPage(currentPage - 1)
+    }
+  }
+  const handleNextPage = () => {
+    if(currentPage < pages.length - 1){
+      setCurrentPage(currentPage + 1)
+    }
+  }
+
 
   return (
     <div>
@@ -60,9 +78,20 @@ const AllVolunteerPost = () => {
             }
         </div>
       </div>
-
-
-
+      
+      {/* pagination here  */}
+    
+      <div className="pagination">
+            <button onClick={handlePrevPage} className="btn mr-2">prev</button>
+            {
+              pages.map((page)=> <button 
+              className={currentPage === page ? `selected btn text-white mx-1` : `btn  mx-1`}
+              onClick={()=> setCurrentPage(page)}
+              key={page} 
+              >{page}</button>) 
+            }
+            <button onClick={handleNextPage} className="btn ml-2">Next</button>
+      </div>
     </div>
   );
 };

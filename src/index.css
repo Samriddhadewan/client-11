@@ -13,3 +13,11 @@ html{
     font-weight: 600;
     color: #0E7A81;
 }
+.pagination{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.pagination .selected{
+    background-color: #0E7A81;
+
+}
