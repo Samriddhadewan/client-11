@@ -4,3 +4,12 @@
 body{
     font-family: "Open Sans", sans-serif;
 }
+html{
+    overflow-y: scroll;
+}
+
+.active{
+    text-decoration: underline;
+    font-weight: 600;
+    color: #0E7A81;
+}

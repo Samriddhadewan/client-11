@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider";
 
 const Navbar = () => {
@@ -17,8 +17,8 @@ const Navbar = () => {
 
   const links = (
     <>
-      <Link className="mr-2" to="/">Home</Link>
-      <Link className="mr-2" to="/allVolunteerPost">All volunteer Need posts</Link>
+      <NavLink className="mr-2" to="/">Home</NavLink>
+      <NavLink className="mr-2" to="/allVolunteerPost">All volunteer Need posts</NavLink>
       
     </>
   );
@@ -50,7 +50,7 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <Link to="/" className="btn btn-ghost text-xl">Voluntopia</Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>

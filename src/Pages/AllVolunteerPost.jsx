@@ -5,6 +5,13 @@ import PostCards from "../Components/PostCards";
 const AllVolunteerPost = () => {
   const [posts, setPosts] = useState([]);
   const [search, setSearch] = useState("");
+  const postsPerPage = 6;
+  const numberOfPages = Math.ceil(posts.length / postsPerPage);
+  console.log(numberOfPages);
+
+
+
+
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios.get(

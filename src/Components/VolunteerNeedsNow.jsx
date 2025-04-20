@@ -18,7 +18,7 @@ const VolunteerNeedsNow = () => {
 
 
   return (
-    <div className='max-w-[1320px] mx-auto mt-10'>
+    <div className=''>
         <h1 className='text-center text-4xl font-semibold'>Volunteer Needs Now</h1>
 
         {/* cards section here  */}

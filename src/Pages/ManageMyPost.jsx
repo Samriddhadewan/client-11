@@ -7,7 +7,7 @@ import VolunteerRequests from '../Components/VolunteerRequests';
 
 const ManageMyPost = () => {
   return (
-   <div className='w-[1120px] mx-auto mt-10'>
+   <div className='w-[1120px] min-h-[80vh] mx-auto mt-10'>
      <Tabs>
     <TabList className='text-center mb-4 border-b-2 border-gray-300'>   
       <Tab>My volunteer need posts
